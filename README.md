@@ -2,16 +2,22 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+1. First clone the project
+
+```bash
+git clone https://github.com/saivivek116/adopt-dogs
+```
+
+2. Change the directory to the project or open the project in vscode and open the terminal. Install the dependencies using the command
+
+```bash
+npm install --legacy-peer-deps
+```
+
+3. run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
