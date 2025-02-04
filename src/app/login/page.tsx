@@ -25,7 +25,6 @@ export default function LoginPage() {
     try {
       // use the swr library along fetcher function to make a POST request
       const res = await universalFetcher({ url: '/auth/login', method: 'POST', body: { name, email } })
-      // console.log(res);
       setLoading(false);
       login();
     } catch (err) {

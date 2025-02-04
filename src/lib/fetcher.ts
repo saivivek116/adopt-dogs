@@ -13,7 +13,6 @@ export interface RequestConfig {
 export default async function universalFetcher(config: RequestConfig) {
   const { url, method = 'GET', body } = config
   const fullUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}${url}`
-  console.log(fullUrl);
 
   const options: RequestInit = {
     method,
@@ -28,12 +27,10 @@ export default async function universalFetcher(config: RequestConfig) {
   }
 
   const res = await fetch(fullUrl, options)
-  // console.log(res);
   if (res.status === 401) {
     throw new Error("Unauthorized");
   }
   if (!res.ok) {
-    console.log('error noticed');
     throw new Error(`Request failed with ${res.status}: ${res.statusText}`)
   }
   
