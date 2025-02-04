@@ -11,6 +11,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import SkeletonDogCard from "@/components/SkeletonDogCard";
 
 const defaultSearchParams = { breeds: [], zipCodes: [], ageMin: 0, ageMax: 20, size: 20, from: 0, sort: "breed:asc" }
 const DOGS_PER_PAGE = 20;
@@ -187,9 +188,7 @@ export default function Home() {
         </div>
       </nav>
       <main className="mb-4">
-        {/* search */}
-        {/* <Input placeholder="Search for dogs" className=""/> */}
-        {/* select component to show the breed options */}
+
         <div className="flex justify-between items-center p-4">
           <div className="flex flex-col ">
             <label htmlFor="breed">Choose Breed</label>
@@ -199,11 +198,13 @@ export default function Home() {
             <label>Sort By</label>
             <Select
               value={searchParams.sort}
-              onValueChange={(value) =>
+              onValueChange={(value) => {
+                setCurrentPage(1);
                 setSearchParams((prev) => ({
                   ...prev,
                   sort: value,
                 }))
+              }
               }
             >
               <SelectTrigger className="w-[180px]">
@@ -223,7 +224,11 @@ export default function Home() {
         {/* dogs results */}
         {
           loading ? (
-            <p>Loading...</p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              {Array.from({ length: 20 }).map((_, index) => (
+                <SkeletonDogCard key={index} />
+              ))}
+            </div>
           ) : dogs.length === 0 ? (
             <p>No dogs found</p>
           ) : (
@@ -259,7 +264,7 @@ export default function Home() {
               <DialogTitle>Ideal Dog</DialogTitle>
             </DialogHeader>
             {idealDogLoading ? (
-              <p>Loading ideal dog...</p>
+              <SkeletonDogCard />
             ) : idealDog && Object.keys(idealDog).length !== 0 ? (
               <div className="flex flex-col items-center gap-4">
                 {idealDog.img && (
