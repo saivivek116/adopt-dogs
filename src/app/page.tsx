@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import DogsList from "@/components/DogsList";
 import { fetchDogs } from "@/lib/fetcher";
-import CustomMultiSelect from "@/components/CustomMultiSelect";
+import CustomMultiSelect from "@/app/_components/CustomMultiSelect";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -32,6 +32,7 @@ export default function Home() {
   useEffect(() => {
     if (!isAuthenticated) {
       router.push('/login')
+      return;
     }
     fetchIds(searchParams);
   }, [isAuthenticated, searchParams]);
@@ -109,6 +110,9 @@ export default function Home() {
       const response = await fetch(url, {
         credentials: 'include'
       });
+      if (response.status === 401) {
+        throw new Error("Unauthorized");
+      }
       if (!response.ok) {
         throw new Error('An error occurred while fetching dog Ids');
       }
@@ -182,7 +186,7 @@ export default function Home() {
           <button onClick={logout}>Logout</button>
         </div>
       </nav>
-      <main>
+      <main className="mb-4">
         {/* search */}
         {/* <Input placeholder="Search for dogs" className=""/> */}
         {/* select component to show the breed options */}

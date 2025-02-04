@@ -24,6 +24,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // Simulate logout by setting `isAuthenticated` to `false`
   function logout() {
     setIsAuthenticated(false);
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/logout`, {
+      method: "POST",
+      credentials: "include",
+    }
+    );
     router.push("/login"); // Redirect to `/login` after logout
   }
 
