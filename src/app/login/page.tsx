@@ -29,8 +29,13 @@ export default function LoginPage() {
       setLoading(false);
       login();
     } catch (err) {
-      console.error(err.message);
-      setError('Login failed. Check your credentials.')
+      if (err.message === "Unauthorized") {
+        // Use next/navigation's router to redirect to login.
+        router.push("/login");
+      } else {
+        console.error(err.message);
+        setError('Login failed. Check your credentials.')
+      }
     } finally {
       setLoading(false)
     }

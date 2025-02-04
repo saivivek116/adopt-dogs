@@ -28,7 +28,10 @@ export default async function universalFetcher(config: RequestConfig) {
   }
 
   const res = await fetch(fullUrl, options)
-  console.log(res);
+  // console.log(res);
+  if (res.status === 401) {
+    throw new Error("Unauthorized");
+  }
   if (!res.ok) {
     console.log('error noticed');
     throw new Error(`Request failed with ${res.status}: ${res.statusText}`)
@@ -57,6 +60,9 @@ export async function fetchDogs(dogIds){
         'Content-Type': 'application/json',
       }
     });
+    if (dogsresponse.status === 401) {
+      throw new Error("Unauthorized");
+    }
     if (!dogsresponse.ok) {
       throw new Error('An error occurred while fetching dogs');
     }

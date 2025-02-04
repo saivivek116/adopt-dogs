@@ -67,6 +67,9 @@ export default function Home() {
         credentials: "include",
         body: JSON.stringify(favDogs),
       });
+      if (response.status === 401) {
+        throw new Error("Unauthorized");
+      }
       if (!response.ok) {
         throw new Error("Failed to fetch ideal dog");
       }
@@ -74,7 +77,12 @@ export default function Home() {
       const dogs = await fetchDogs([match]);
       setIdealDog(dogs[0]);
     } catch (error) {
-      console.error(error);
+      if (error.message === "Unauthorized") {
+        // Use next/navigation's router to redirect to login.
+        router.push("/login");
+      } else {
+        console.error(error);
+      }
     } finally {
       setIdealDogLoading(false);
     }
@@ -114,8 +122,12 @@ export default function Home() {
       const dogs = await fetchDogs(resultIds);
       setDogs(dogs);
     } catch (err) {
-      console.log(err.message);
-
+      if (err.message === "Unauthorized") {
+        // Use next/navigation's router to redirect to login.
+        router.push("/login");
+      } else {
+        console.log(err.message);
+      }
     } finally {
       setLoading(false);
     }
