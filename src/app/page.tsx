@@ -162,7 +162,7 @@ export default function Home() {
                   <span className="inline-block">
                     <Button
                       onClick={handleMatchDogs}
-                      className="outline bg-gray-300 text-black hover:bg-gray-100"
+                      className="bg-[#300d38] text-white hover:bg-[#890075]"
                       disabled
                     >
                       Match Dogs
@@ -177,7 +177,7 @@ export default function Home() {
           ) : (
             <Button
               onClick={handleMatchDogs}
-              className="outline bg-gray-300 text-black hover:bg-gray-100"
+              className="bg-[#300d38] text-white hover:bg-[#890075]"
             >
               Match Dogs
             </Button>
