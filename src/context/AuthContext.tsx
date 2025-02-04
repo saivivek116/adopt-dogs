@@ -12,13 +12,13 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
 
   // Simulate login by setting `isAuthenticated` to `true`
   function login() {
     setIsAuthenticated(true);
-    router.push("/"); // Redirect to `/dogs` after login
+    router.push("/");
   }
 
   // Simulate logout by setting `isAuthenticated` to `false`
