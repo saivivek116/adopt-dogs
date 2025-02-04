@@ -3,7 +3,6 @@ import Image from "next/image";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Input } from "@/components/ui/input";
 import DogsList from "@/components/DogsList";
 import { fetchDogs } from "@/lib/fetcher";
 import CustomMultiSelect from "@/components/CustomMultiSelect";
@@ -39,7 +38,6 @@ export default function Home() {
 
 
   const handleBreedChange = (selected) => {
-    // Reset pagination when filters change (optional)
     setCurrentPage(1);
     setSearchParams((prev) => ({
       ...prev,

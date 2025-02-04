@@ -9,10 +9,7 @@ export interface RequestConfig {
   body?: any
 }
 
-/**
- * A universal fetcher for SWR that can handle GET, POST, etc.
- * We rely on the key being an object with { url, method, body }.
- */
+
 export default async function universalFetcher(config: RequestConfig) {
   const { url, method = 'GET', body } = config
   const fullUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}${url}`
@@ -48,10 +45,7 @@ export default async function universalFetcher(config: RequestConfig) {
 
 }
 
-// interface FetchDogsResponse {
-//   error?: string;
-//   dogs?: Dog[];
-// }
+
 
 export async function fetchDogs(dogIds){
   try {

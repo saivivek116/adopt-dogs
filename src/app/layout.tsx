@@ -2,8 +2,6 @@
 import { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css' // your tailwind styles
-import { SWRConfig } from 'swr'
-import fetcher from '@/lib/fetcher'
 import { AuthProvider } from '../context/AuthContext'
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,15 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AuthProvider>
-          <SWRConfig
-            value={{
-              fetcher,
-              // You can customize revalidateOnFocus, etc.
-              // revalidateOnFocus: false,
-            }}
-          >
-            {children}
-          </SWRConfig>
+          {children}
         </AuthProvider>
       </body>
     </html>
